@@ -1,3 +1,4 @@
+ngbuild prd
 firebase deploy
 
 // https://shop-e7e3a.firebaseapp.com/
