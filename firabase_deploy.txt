@@ -2,3 +2,9 @@ ngbuild prd
 firebase deploy
 
 // https://shop-e7e3a.firebaseapp.com/
+
+-- getboostrap
+https://getbootstrap.com/
+
+-- git fácil
+http://rogerdudler.github.io/git-guide/index.pt_BR.html
