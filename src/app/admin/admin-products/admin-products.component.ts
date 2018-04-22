@@ -1,6 +1,9 @@
+
+import { Product } from './../../models/product';
 import { ProductService } from './../../product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-admin-products',
@@ -8,9 +11,14 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
-  lstProducts: any[] = [];
+  lstProducts: Product[];
   lstFiltrado: any[] = [];
   subscription: Subscription;
+
+  // DataTable
+ // tableResourse: DataTableResource<Product>;
+  items: Product[];
+  itemCount: number;
 
   constructor(private productService: ProductService) {
   }
@@ -25,15 +33,32 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   filterBySuru(query: string) {
     this.lstFiltrado = (query) ?
-    this.lstProducts.filter(p => p['title'].toLowerCase().includes(query.toLowerCase())) :
+    this.lstProducts.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
     this.lstProducts;
   }
 
   getProducts() {
-     this.subscription = this.productService.getAll().subscribe(itens => {
-        this.lstProducts = itens;
-        this.lstFiltrado = itens;
+     this.subscription = this.productService.getAll().subscribe(products => {
+        this.lstProducts = products;
+        this.lstFiltrado = products;
         console.log('Produtos: ', this.lstProducts);
+
+      //  this.initializeTable(products);
       });
   }
+
+  // private initializeTable(products: Product[]) {
+  //   this.tableResourse = new DataTableResource(products);
+  //   this.tableResourse.query({ offset: 0 })
+  //    .then(items => this.items = items);
+  //   this.tableResourse.count()
+  //    .then(count => this.itemCount);
+  // }
+
+  // reloadItems(params) {
+  //   // tslint:disable-next-line:curly
+  //   if (!this.tableResourse) return;
+  //   this.tableResourse.query(params)
+  //    .then(items => this.items = items);
+  // }
 }

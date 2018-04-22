@@ -1,3 +1,5 @@
+
+import {DataTableModule} from 'angular2-datatable';
 import { CategoryService } from './category.service';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -11,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -27,6 +30,7 @@ import { UserService } from './user.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ProductService } from './product.service';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -48,6 +52,8 @@ import { ProductService } from './product.service';
   imports: [
     BrowserModule,
     FormsModule,
+    DataTableModule,
+    CommonModule,
     CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -62,7 +68,7 @@ import { ProductService } from './product.service';
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
-  
+
       {
         path: 'admin/products/new',
         component: ProductFormComponent,

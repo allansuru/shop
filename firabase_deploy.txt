@@ -11,3 +11,6 @@ http://rogerdudler.github.io/git-guide/index.pt_BR.html
 
 -- ng2-validation -- todas validaçoes possíveis
 https://github.com/yuyang041060120/ng2-validation
+
+-- datable
+https://www.npmjs.com/package/angular-4-data-table
