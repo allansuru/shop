@@ -1,3 +1,4 @@
+
 <p>
 <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
@@ -8,43 +9,25 @@
     class="form-control" 
     placeholder="Search...">
 </p>
- <!-- <data-table
-[items]="items"
-[itemCount]="itemCount"
-(reload)="reloadItems($event)"
->
-<data-table-column
-[property]="'title'"
-[header]="'Title'"
-[sortable]="true"
-[resizable]="true"
->
-<data-table-column
-[property]="'price'"
-[header]="'Price'"
-[sortable]="true"
-[resizable]="true"
->
-<ng-template #dataTableCell let-item="product">
-    {{ product.price | currency:'USD':true }}
-</ng-template>
-</data-table-column>
-<data-table-column
-[property]="'$key'"
->
-<ng-template #dataTableCell let-item="product">
-   <a [routerLink]="['/admin/products/', p.$key]">Edit</a>
-</ng-template>
-</data-table-column>
-</data-table>  -->
-
-<table class="table">
+ 
+<table class="table table-hover table-dark">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Price</th>
+            <th class="small text-muted" (click)="orderColumnCategoria( 'title' )">
+                <i class="fa"
+                 [ngClass]="ordem ? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-circle-arrow-down' " 
+                 [hidden]="column !== 'title'"> 
+                </i>Title</th>
+                <th class="small text-muted" (click)="orderColumnCategoria( 'price' )">
+                        <i class="fa"
+                         [ngClass]="ordem ? 'glyphicon glyphicon-circle-arrow-up' : 'glyphicon glyphicon-circle-arrow-down' " 
+                         [hidden]="column !== 'price'"> 
+                        </i>Price</th>
             <th></th>
         </tr>
+        <tr class="big bg-info">
+            <th class="bg-info" colspan="50">{{ lstProducts?.length }} registros no total!</th>
+          </tr>
     </thead>
     <tbody>
         <tr *ngFor="let p of lstFiltrado">
@@ -56,3 +39,18 @@
         </tr>
     </tbody>
 </table>
+<ul class="pagination" [hidden]="paginado?.length == 0">
+    <li class="page-item">
+      <button type="button" class="page-link"  (click)="mudarPagina( pagina - 1 )" [disabled]="pagina == 0">
+        Anterior
+      </button>
+    </li>
+    <li class="page-item" [ngClass]="{'active': i == pagina }" *ngFor="let p of paginacao; let i = index">
+      <a class="page-link" href="javascript:void(0)" (click)="mudarPagina( i )">{{i+1}}</a>
+    </li>
+    <li class="page-item">
+      <button type="button" class="page-link" (click)="mudarPagina( pagina + 1 )"  [disabled]="pagina == paginacao?.length - 1">
+        Próxima
+      </button>
+    </li>
+  </ul> 
