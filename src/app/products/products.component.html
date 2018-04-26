@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-3">
-  <div class="list-group">
-    <a class="list-group-item list-group-item-action"
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action"
     [class.active] = "category === c.$key"
     routerLink="/"
     [queryParams]="{ category: c.$key }" 
     *ngFor="let c of categories" 
     (click)="filterProductsByCategory(c.$key)">
       {{ c.name }}
-    </a>
-  </div>
+  </li>
+  </ul>
 </div>
 <div class="col">
     <div class="row">
