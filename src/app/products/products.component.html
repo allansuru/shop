@@ -5,15 +5,7 @@
 <div class="col">
     <div class="row">
         <ng-container *ngFor="let product of filterProducts; let i = index">
-          <div class="col">
-            <div class="card" style="width: 15rem;" *ngIf="product.title">
-              <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl">
-              <div class="card-body">
-                <h5 class="card-title">{{ product.title }}</h5>
-                <p class="card-text">{{ product.price | currency:'USD':true }}</p>
-              </div>
-            </div>
-          </div>
+            <app-product-card [product]="product" [actions]="true"></app-product-card>
           <div *ngIf="(i + 1)  % 2 === 0" class="w-100"></div>
         </ng-container>
       </div>

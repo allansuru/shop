@@ -5,6 +5,7 @@ firebase deploy
 
 -- getboostrap
 https://getbootstrap.com/
+https://getbootstrap.com/docs/4.1/utilities/borders/
 
 -- git fácil
 http://rogerdudler.github.io/git-guide/index.pt_BR.html
