@@ -31,6 +31,7 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ProductService } from './product.service';
 import { CommonModule } from '@angular/common';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 
 
@@ -47,7 +48,8 @@ import { CommonModule } from '@angular/common';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,
