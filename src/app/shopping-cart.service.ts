@@ -15,7 +15,8 @@ export class ShoppingCartService {
       });
   }
 
-  private getCart(cartId: string) {
+  async getCart() {
+    const cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId);
   }
 
@@ -23,7 +24,7 @@ export class ShoppingCartService {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
 
-  private async getOrCreateCartId() {
+  private async getOrCreateCartId(): Promise<string> {
     const cartId = localStorage.getItem('cartId');
     if (cartId) { return cartId; }
 
@@ -34,14 +35,24 @@ export class ShoppingCartService {
   }
 
   async addToCart(product: Product) {
-    const cartId = await this.getOrCreateCartId();
-    const item$ = this.getItem(cartId, product.$key);
-
-    item$.take(1).subscribe(item => {
-      item$.update({ product: product, quantity: (item.quantity || 0) + 1});
-    });
+    this.updateItemQuantity(product, 1);
   }
+
+  async removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+ }
+
+ private async updateItemQuantity(product: Product, change: number) {
+  const cartId = await this.getOrCreateCartId();
+  const item$ = this.getItem(cartId, product.$key);
+
+  item$.take(1).subscribe(item => {
+    item$.update({ product: product, quantity: (item.quantity || 0) + change});
+  });
+ }
 }
+
+
 
 // Pra que usar If/Else?
 /**      if (item.$exists()) {
