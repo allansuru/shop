@@ -5,8 +5,11 @@ items: ShoppingCartItem[] = [];
 
     constructor(public itemsMap: { [productId: string]: ShoppingCartItem } ) {
         // tslint:disable-next-line:curly
-        for (const productId in itemsMap)
-            this.items.push(itemsMap[productId]);
+        // tslint:disable-next-line:forin
+        for (const productId in itemsMap) {
+            const item = itemsMap[productId];
+            this.items.push(new ShoppingCartItem(item.product, item.quantity));
+        }
     }
 
     get totalItemsCount() {
@@ -18,13 +21,13 @@ items: ShoppingCartItem[] = [];
       return count;
     }
 
-    get totalItensPrice() {
-        let count = 0;
+    get totalPrices() {
+        let sum = 0;
         // tslint:disable-next-line:forin
-        for (const productId in this.itemsMap) {
-           count += this.itemsMap[productId].product.price * this.itemsMap[productId].quantity;
+        for (const productId in this.items) {
+            sum += this.items[productId].totalPrice;
         }
-        return count;
+        return sum;
       }
     }
-}
+

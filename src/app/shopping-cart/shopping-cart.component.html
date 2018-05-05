@@ -20,14 +20,16 @@
           {{ item.quantity }}
         </td>
         <td>
-          {{ item.product.price | currency:'BRL':true  }}
+          {{ item.totalPrice | currency:'BRL':true  }}
         </td>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td><b>{{ cart.totalItensPrice | currency:'BRL':true }}</b></td>
-      </tr>
     </tbody>
+    <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th><b>{{ cart.totalPrices | currency:'BRL':true }}</b></th>
+        </tr>
+      </tfoot>
   </table>
 </ng-container>

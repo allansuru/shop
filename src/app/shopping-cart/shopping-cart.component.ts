@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCartItem } from '../models/shopping-cart-item';
 
 @Component({
   selector: 'app-shopping-cart',
