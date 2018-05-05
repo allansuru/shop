@@ -51,7 +51,15 @@ export class ShoppingCartService {
   const item$ = this.getItem(cartId, product.$key);
 
   item$.take(1).subscribe(item => {
-    item$.update({ product: product, quantity: (item.quantity || 0) + change});
+    item$.update({ product: product, quantity: (item.quantity || 0) + change})
+    .then(resp => {
+      const item$2 = this.getItem(cartId, product.$key);
+      item$2.take(1).subscribe(r => {
+          if (r.quantity === 0) {
+               item$2.remove();
+          }
+      });
+    });
   });
  }
 }

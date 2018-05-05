@@ -8,7 +8,7 @@
       <tr>
         <th>Product</th>
         <th>Quantity</th>
-        <th></th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody>
@@ -16,8 +16,17 @@
         <td>
           {{ item.product.title }}
         </td>
-        <td>     {{ item.quantity}}</td>
+        <td>
+          {{ item.quantity }}
+        </td>
+        <td>
+          {{ item.product.price | currency:'BRL':true  }}
+        </td>
+      </tr>
+      <tr>
         <td></td>
+        <td></td>
+        <td><b>{{ cart.totalItensPrice | currency:'BRL':true }}</b></td>
       </tr>
     </tbody>
   </table>

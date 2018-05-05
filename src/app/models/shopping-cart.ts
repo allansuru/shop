@@ -17,4 +17,14 @@ items: ShoppingCartItem[] = [];
       }
       return count;
     }
+
+    get totalItensPrice() {
+        let count = 0;
+        // tslint:disable-next-line:forin
+        for (const productId in this.itemsMap) {
+           count += this.itemsMap[productId].product.price * this.itemsMap[productId].quantity;
+        }
+        return count;
+      }
+    }
 }
