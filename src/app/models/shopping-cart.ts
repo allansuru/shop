@@ -11,6 +11,7 @@ items: ShoppingCartItem[] = [];
 
     get totalItemsCount() {
        let count = 0;
+      // tslint:disable-next-line:forin
       for (const productId in this.itemsMap) {
          count += this.itemsMap[productId].quantity;
       }
