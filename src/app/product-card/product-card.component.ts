@@ -1,3 +1,4 @@
+import { ShoppingCart } from './../models/shopping-cart';
 import { Product } from './../models/product';
 import { Component, Input } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
@@ -12,22 +13,12 @@ export class ProductCardComponent {
   @Input('product') product: Product;
   @Input('actions') actions = true;
   // tslint:disable-next-line:no-input-rename
-  @Input('shopping-cart') shoppingCart;
+  @Input('shopping-cart') shoppingCart: ShoppingCart;
 
-  constructor(private cartService: ShoppingCartService) { }
+
+  constructor(private cartService: ShoppingCartService) {}
 
   addToCart() {
-   this.cartService.addToCart(this.product);
-  }
-
-  removeFromCart() {
-    this.cartService.removeFromCart(this.product);
-  }
-
-  getQuantity() {
-    if (!this.shoppingCart) { return 0; }
-
-  const item = this.shoppingCart.itemsMap[this.product.$key];
-  return item ? item.quantity : 0;
-  }
+    this.cartService.addToCart(this.product);
+   }
 }
