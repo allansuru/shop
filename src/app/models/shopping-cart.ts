@@ -7,6 +7,7 @@ items: ShoppingCartItem[] = [];
     constructor(public itemsMap: { [productId: string]: ShoppingCartItem } ) {
 
         this.itemsMap = itemsMap || {};
+          // Forma top de inicializar uma classe, ver o constructoor da ShoppingCartItem
         // tslint:disable-next-line:curly
         // tslint:disable-next-line:forin
         for (const productId in itemsMap) {
