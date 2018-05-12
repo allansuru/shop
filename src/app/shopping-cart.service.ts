@@ -12,17 +12,32 @@ export class ShoppingCartService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  private create() {
-     return this.db.list('/shopping-carts').push({
-        dateCrated: new Date().getTime()
-      });
-  }
 
   async getCart(): Promise<Observable<ShoppingCart>> {
     const cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId)
     .map(x => new ShoppingCart(x.items));
   }
+
+
+  async addToCart(product: Product) {
+    this.updateItem(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateItem(product, -1);
+ }
+
+ async clearCart() {
+  let cartId = await this.getOrCreateCartId();
+  this.db.object('/shopping-carts/' + cartId + '/items').remove();
+}
+
+ private create() {
+  return this.db.list('/shopping-carts').push({
+     dateCrated: new Date().getTime()
+   });
+}
 
   private getItem(cartId: string, productId: string) {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
@@ -38,14 +53,6 @@ export class ShoppingCartService {
 
   }
 
-  async addToCart(product: Product) {
-    this.updateItem(product, 1);
-  }
-
-  async removeFromCart(product: Product) {
-    this.updateItem(product, -1);
- }
-
  private async updateItem(product: Product, change: number) {
   const cartId = await this.getOrCreateCartId();
   const item$ = this.getItem(cartId, product.$key);
@@ -57,15 +64,19 @@ export class ShoppingCartService {
       price: product.price,
       quantity: (item.quantity || 0) + change})
     .then(resp => {
-      const item$2 = this.getItem(cartId, product.$key);
-      item$2.take(1).subscribe(r => {
-          if (r.quantity === 0) {
-               item$2.remove();
-          }
-      });
+      this.removeItemFromDB(cartId, product);
     });
   });
  }
+
+  private removeItemFromDB(cartId: string, product: Product) {
+    const item$ = this.getItem(cartId, product.$key);
+    item$.take(1).subscribe(r => {
+      if (r.quantity === 0) {
+        item$.remove();
+      }
+    });
+  }
 }
 
 
