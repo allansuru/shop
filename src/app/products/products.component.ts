@@ -1,3 +1,5 @@
+import { ShoppingCart } from './../models/shopping-cart';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -11,13 +13,12 @@ import { ShoppingCartService } from '../shopping-cart.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
   filterProducts: Product[] = [];
   category: string;
-  cart: any;
-  subscription: Subscription;
+  cart$: Observable<ShoppingCart>;
 
   constructor(
     private productService: ProductService,
@@ -53,12 +54,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   async getQuantity() {
-  this.subscription = (await this.shoppingCartService.getCart())
-   .subscribe(cart => this.cart = cart);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  this.cart$ = (await this.shoppingCartService.getCart());
   }
 
 }

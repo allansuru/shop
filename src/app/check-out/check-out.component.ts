@@ -1,3 +1,4 @@
+import { Shipping } from './../models/shipping';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./check-out.component.css']
 })
 export class CheckOutComponent implements OnInit {
-
+  shipping = {};
   constructor() { }
 
   ngOnInit() {
+  }
+
+  save(f) {
+    console.log(f);
   }
 
 }
