@@ -1,20 +1,66 @@
+import { OrderService } from './../order.service';
+import { Subscription } from 'rxjs/Subscription';
+import { ShoppingCartService } from './../shopping-cart.service';
+import { getTestBed } from '@angular/core/testing';
 import { Shipping } from './../models/shipping';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ShoppingCart } from '../models/shopping-cart';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent implements OnInit {
+export class CheckOutComponent implements OnInit, OnDestroy {
   shipping = {};
-  constructor() { }
+  cart: ShoppingCart;
+  userId: string;
+  userName: string;
+  cartSubscription: Subscription;
+  userSubscription: Subscription;
 
-  ngOnInit() {
+  constructor(
+    private authService: AuthService,
+    private orderService: OrderService,
+    private shoppingCartService: ShoppingCartService,
+  ) { }
+
+  async ngOnInit() {
+    const cart$ = await this.shoppingCartService.getCart();
+    this.cartSubscription = cart$.subscribe(cart => this.cart = cart);
+    this.userSubscription = this.authService.user$.subscribe(user => {
+      this.userId = user.uid;
+      this.userName = user.displayName;
+    } );
   }
 
-  save(f) {
-    console.log(f);
+  ngOnDestroy() {
+    this.cartSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
+  }
+
+  placeOrder(f) {
+    const order = {
+      user: {
+        userId: this.userId,
+        userName: this.userName,
+      },
+      datePlaced: new Date().getTime(),
+      shipping: this.shipping,
+      items: this.cart.items.map(i => {
+        return {
+          product: {
+            title: i.title,
+            imageUrl: i.imageUrl,
+            price: i.price
+          },
+          quantity: i.quantity,
+          totalPrice: i.totalPrice
+        };
+      })
+    };
+    this.orderService.storeOrder(order);
   }
 
 }

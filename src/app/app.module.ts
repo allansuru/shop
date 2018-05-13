@@ -1,3 +1,4 @@
+import { OrderService } from './order.service';
 
 import {DataTableModule} from 'angular2-datatable';
 import { CategoryService } from './category.service';
@@ -105,7 +106,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     AdminAuthGuard,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })
