@@ -2,7 +2,7 @@ import { OrderService } from './order.service';
 
 import {DataTableModule} from 'angular2-datatable';
 import { CategoryService } from './category.service';
-import { AuthGuard } from './auth-guard.service';
+import { AuthGuard } from 'shared/services/auth-guard.service';
 import { AuthService } from './auth.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
