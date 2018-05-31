@@ -3,9 +3,9 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from '../product.service';
+import { ProductService } from 'shared/services/product.service';
 import { Product } from 'shared/models/product';
-import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 
 
 @Component({
