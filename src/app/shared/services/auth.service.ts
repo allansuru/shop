@@ -1,4 +1,4 @@
-import { UserService } from '../../user.service';
+import { UserService } from 'shared/services/user.service';
 import { AppUser } from 'shared/models/app-user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
