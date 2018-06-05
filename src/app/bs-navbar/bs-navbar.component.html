@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-  <a class="navbar-brand" routerLink="/">Shop</a>
+  <a class="navbar-brand" routerLink="/">
+    <i class="fas fa-leaf-heart"></i>
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,7 +10,8 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/shopping-cart">Shopping Cart 
+        <a class="nav-link" routerLink="/shopping-cart">
+          <i class="fas fa-shopping-cart"></i>
           <span class="badge badge-pill badge-warning" *ngIf="cart$ | async as cart">
             {{ cart.totalItemsCount }}
           </span>
