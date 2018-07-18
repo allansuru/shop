@@ -30,6 +30,9 @@ export class BsNavbarComponent implements OnInit {
     this.cart$ = await this.shoppingCartService.getCart();
 
   }
+  login() {
+    this.auth.login();
+  }
 
   logout() {
     this.auth.logout();
