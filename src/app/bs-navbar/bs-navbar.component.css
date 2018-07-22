@@ -6,3 +6,13 @@ li.nav-item.dropdown {
     position: relative;
     right: 182px;
 }
+
+.titulo-site {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 800;
+    position: relative;
+    top: 5px;
+}
+
+

@@ -1,3 +1,10 @@
 .sticky-top {
     top: 80px;
 }
+
+
+.list-group {
+    position: relative !important;
+    margin: 25px !important;
+    width: 240px !important;
+}
