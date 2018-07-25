@@ -15,4 +15,8 @@ li.nav-item.dropdown {
     top: 5px;
 }
 
+a.nav-link {
+    cursor: pointer;
+}
+
 
